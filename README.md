@@ -122,3 +122,7 @@ npm test
 ```
 
 就可以看到在命令行中运行测试并输出报告。
+
+
+#### tasking图
+![image.png](https://upload-images.jianshu.io/upload_images/6609243-cbd38e14379a6ca6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

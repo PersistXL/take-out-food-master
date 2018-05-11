@@ -40,6 +40,28 @@ function calculateDiscounts(selectedItemsArray) {
   }
 }
 
+function splice(discountInformation, selectedItemsArray) {
+  let _html_head = `============= 订餐明细 =============\n`;
+  let _html_middle = `-----------------------------------\n`;
+  let _html_footer = `===================================`;
+  let _html_listPrice = ``;
+  if (discountInformation.type === '指定菜品半价') {
+    var _html_discount = `使用优惠:\n${discountInformation.type}(黄焖鸡，凉皮)，省${discountInformation.discountPrice}元\n`;
+  } else {
+    var _html_discount = `使用优惠:\n${discountInformation.type}，省${discountInformation.discountPrice}元\n`;
+  }
+  let _html_total = `总计：${discountInformation.totalPrice}元\n`;
+  selectedItemsArray.map(item => {
+    _html_listPrice += `${item.name} x ${item.num} = ${item.subtotal}元\n`;
+  });
+  if (totalPrice > 30) {
+    _html = _html_head + _html_listPrice + _html_middle + _html_discount + _html_middle + _html_total + _html_footer;
+  } else {
+    _html = _html_head + _html_listPrice + _html_middle + _html_total + _html_footer;
+  }
+  return _html;
+}
+
 function bestCharge(selectedItems) {
 
   //获取相关商品的信息
@@ -47,23 +69,5 @@ function bestCharge(selectedItems) {
   //计算优惠
   let discountInformation = calculateDiscounts(selectedItemsArray);
   //拼接
-  let _html_head = `============= 订餐明细 =============\n`;
-  let _html_middle = `-----------------------------------\n`;
-  let _html_footer = `===================================`;
-  let _html_listPrice = ``;
-  if(discountInformation.type === '指定菜品半价') {
-    var _html_discount = `使用优惠:\n${discountInformation.type}(黄焖鸡，凉皮)，省${discountInformation.discountPrice}元\n`;
-  }else {
-    var _html_discount = `使用优惠:\n${discountInformation.type}，省${discountInformation.discountPrice}元\n`;
-  }
-  let _html_total = `总计：${discountInformation.totalPrice}元\n`;
-  selectedItemsArray.map(item => {
-    _html_listPrice += `${item.name} x ${item.num} = ${item.subtotal}元\n`;
-  });
-  if (totalPrice>30) {
-    _html = _html_head + _html_listPrice + _html_middle + _html_discount + _html_middle + _html_total + _html_footer;
-  }else {
-    _html = _html_head + _html_listPrice + _html_middle + _html_total + _html_footer;
-  }
-  return _html;
+  return splice(discountInformation, selectedItemsArray);
 }
